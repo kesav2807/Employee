@@ -1,4 +1,5 @@
 import express from 'express';
+import upload from '../middleware/upload.js';
 import {
   getAllEmployees,
   getEmployeeById,
@@ -11,8 +12,8 @@ const router = express.Router();
 
 router.get('/', getAllEmployees);
 router.get('/:id', getEmployeeById);
-router.post('/', createEmployee);
-router.put('/:id', updateEmployee);
+router.post('/', upload.single('profileImage'), createEmployee);
+router.put('/:id', upload.single('profileImage'), updateEmployee);
 router.delete('/:id', deleteEmployee);
 
 export default router;
